@@ -1,3 +1,56 @@
+// need a Document Ready Function to open the modal upon 
+// first starting page; then can click into content
+// NOTE the modal is also triggered by clicking on navbar brand
+
+// need an onclick to map
+// to display a country's name 
+// and that onlick pulls
+// the correct country's information
+// into the infobar
+// it should also append the politgraph's Title, since
+// that is empty when the page loads 
+
+
+$(".nav-tabs").on("click", "#polittab", function () {
+  // on click:
+  // make it Active Tab
+  $(this).addClass("active");
+  $("#econtab").removeClass("active");
+  $("#envirotab").removeClass("active");
+  // display country-appropriate polit graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF POLIT GRAPH]");
+//  $("#graphimg").append();
+  // display whatever links we wish to
+  $("#articles").empty();
+  $("#articles").append("whatever articles we want to call in");
+});
+
+$(".nav-tabs").on("click", "#econtab", function () {
+  // on click:
+  // make it Active Tab
+  $(this).addClass("active");
+  $("#polittab").removeClass("active");
+  $("#envirotab").removeClass("active");
+  // display country-appropriate econ graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF ECON GRAPH]");
+//  $("#graphimg").append();
+});
+
+$(".nav-tabs").on("click", "#envirotab", function () {
+  // on click:
+  // make it Active Tab
+  $(this).addClass("active");
+  $("#econtab").removeClass("active");
+  $("#polittab").removeClass("active");
+  // display country-appropriate enviro graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF ENVIRO GRAPH]");
+});
+
+
+
 // Creating map object
 var myMap = L.map("map", {
     center: [40.4637, 3.7492],
