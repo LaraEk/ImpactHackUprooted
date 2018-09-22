@@ -195,6 +195,24 @@ var countries = ['ALB', 'DZA', 'AND', 'AGO', 'ATG', 'ARG', 'ARM', 'AUS', 'AUT',
 
 /// CONTAINERS
 
+function load_articles(){
+  d3.queue()
+    .defer(d3.csv, './newyorktimesarticles.csv')
+      .await(function(error, articles) {
+      console.log('got csv')
+      console.log(articles)
+      d3.select("#articles")
+      .append("text")
+      .text(articles[7]['title'])
+      // articles.forEach(function(item, i){
+      //   console.log('Adding title')
+      //   d3.select("#articles")
+      //     .append("text")
+      //     .text(item['title'])
+  })
+}
+
+
 var scatter_svg = d3.select("#scatterplot")
   .append("svg")
     .attr("width", scatter_width + margin.left + margin.right)
@@ -355,6 +373,8 @@ scatter_svg.append("text")
           return "translate(0,0)"
         }
       });
+
+
       scatter_svg.selectAll("g.bubble circle")
      .transition()
      .duration(700)
@@ -368,6 +388,7 @@ scatter_svg.append("text")
      })
      .style('stroke', 'white')
      .style('stroke-opacity', .4)
+
 }
 
 function update_labels(){
@@ -424,7 +445,10 @@ d3.queue()
       });
     console.log(lookup)
     refresh_graphic()
+    load_articles()
     });
+
+
 
 </script>
 </body>
