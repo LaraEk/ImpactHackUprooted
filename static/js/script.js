@@ -4,6 +4,21 @@ var myMap = L.map("map", {
     zoom: 2
   });
   
+  var country = "wld"
+
+  //Function to update Country variable
+  function onEachFeature(feature, layer) {
+    //bind click
+    layer.on('click', function (e) {
+      country = feature.properties.iso_a3
+      console.log(feature.properties.iso_a3)
+
+      // e = event
+      
+    });
+
+}
+
   // Adding tile layer
   L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -46,9 +61,7 @@ var myMap = L.map("map", {
   
       // Binding a pop-up to each layer
       // Add event listener to add popup to layer and add to map
-    //onEachFeature: function(feature, layer) {
-    //  layer.bindPopup(feature.properties.LOCALNAME + ", " + feature.properties.State + "<br>Median Household Income:<br>" +
-    //    "$" + feature.properties.MHI);
+    onEachFeature: onEachFeature
     //}
   //}).addTo(myMap);
   
