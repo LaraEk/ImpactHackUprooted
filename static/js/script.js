@@ -1,10 +1,41 @@
-$(document).ready(function () {
+// need an onclick to map
+// to display a country's name 
+// and that onlick pulls
+// the correct country's information
+// into the infobar
 
-  $('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');
-  });
 
+$(".nav-tabs").on("click", "#polittab", function () {
+  // on click:
+  $(this).addClass("active");
+  $("#econtab").removeClass("active");
+  $("#envirotab").removeClass("active");
+  // make it Active Tab
+  // display country-appropriate polit graph
+  // display whatever links we wish to
 });
+
+$(".nav-tabs").on("click", "#econtab", function () {
+  // on click:
+  $(this).addClass("active");
+  $("#polittab").removeClass("active");
+  $("#envirotab").removeClass("active");
+  // make it Active Tab
+  // display country-appropriate econ graph
+  // display whatever links we wish to
+});
+
+$(".nav-tabs").on("click", "#envirotab", function () {
+  // on click:
+  $(this).addClass("active");
+  $("#econtab").removeClass("active");
+  $("#polittab").removeClass("active");
+  // make it Active Tab
+  // display country-appropriate enviro graph
+  // display whatever links we wish to
+});
+
+
 
 // Creating map object
 var myMap = L.map("map", {
