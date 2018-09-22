@@ -199,6 +199,21 @@ var countries = ['ALB', 'DZA', 'AND', 'AGO', 'ATG', 'ARG', 'ARM', 'AUS', 'AUT',
 
 /// CONTAINERS
 
+function load_articles(){
+  d3.queue()
+    .defer(d3.csv, './newyorktimesarticles.csv')
+      .await(function(error, articles) {
+      console.log('got csv')
+      console.log(articles)
+      articles.forEach(function(item, i){
+        console.log('Adding title')
+        d3.select("#articles")
+          .append("text")
+          .text(item['title'])
+  })
+})
+}
+
 var scatter_svg = d3.select("#scatterplot")
   .append("svg")
     .attr("width", scatter_width + margin.left + margin.right)
@@ -428,7 +443,10 @@ d3.queue()
       });
     console.log(lookup)
     refresh_graphic()
+    load_articles()
     });
+
+
 
 </script>
 </body>
