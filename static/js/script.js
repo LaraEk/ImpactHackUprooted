@@ -24,7 +24,7 @@ $(".nav-tabs").on("click", "#polittab", function () {
   $("#graphexplanation").append("The Political Freedom Index demonstrates the freedom of citizens to express themseslves politically.");
   // display whatever links we wish to
   $("#articles").empty();
-  $("#articles").append("whatever articles we want to call in");
+//  $("#articles").append("whatever articles we want to call in");
 });
 
 $(".nav-tabs").on("click", "#econtab", function () {
