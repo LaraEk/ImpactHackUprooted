@@ -3,10 +3,7 @@ var myMap = L.map("map", {
     center: [40.4637, 3.7492],
     zoom: 2
   });
-  
   var country = "wld"
-
-
 
   // Adding tile layer
   L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
