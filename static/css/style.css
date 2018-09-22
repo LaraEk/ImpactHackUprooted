@@ -16,38 +16,27 @@ body {
     font-size: 30px;
 }
 
-.wrapper {
-    display: flex;
-    align-items: stretch;
+.infobar {
+    background: rgb(255,255,255, .8);
 }
 
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 100vh;
+.infobar p {
+    font-family: 'Titillium Web', Sans-Serif;
+    font-size: 16px;
 }
 
-#sidebar.active {
-    margin-left: -250px;
+#countryname {
+    font-family: 'Dosis', Sans-Serif;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
 }
 
-a[data-toggle="collapse"] {
-    position: relative;
+.nav-tabs {
+    font-family: 'Titillium Web', Sans-Serif;
+    font-size: 16px;
 }
 
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
+#graphimg {
+    margin: 20px;
 }
