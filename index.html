@@ -205,14 +205,17 @@ function load_articles(){
       .await(function(error, articles) {
       console.log('got csv')
       console.log(articles)
-      articles.forEach(function(item, i){
-        console.log('Adding title')
-        d3.select("#articles")
-          .append("text")
-          .text(item['title'])
+      d3.select("#articles")
+      .append("text")
+      .text(articles[7]['title'])
+      // articles.forEach(function(item, i){
+      //   console.log('Adding title')
+      //   d3.select("#articles")
+      //     .append("text")
+      //     .text(item['title'])
   })
-})
 }
+
 
 var scatter_svg = d3.select("#scatterplot")
   .append("svg")
