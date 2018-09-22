@@ -108,7 +108,7 @@ var myMap = L.map("map", {
         //bind click
         layer.on('click', function (e) {
           country = feature.properties.iso_a3
-          console.log(country)
+          update_to_selected_region(country)
         });
       }
 

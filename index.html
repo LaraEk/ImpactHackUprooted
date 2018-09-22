@@ -73,7 +73,9 @@
                 <div id="scatterplot"></div>
                 <div id="graphtitle"></div>
                 <div id="graphexplanation"></div>
-                <p><b>Graph Explanation:</b> 
+
+                <p><b>Graph Explanation:</b>
+
                     <br/> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non massa tellus. Fusce maximus placerat nibh. Suspendisse diam nulla, mollis ut nisl ac, varius iaculis libero. Vivamus interdum ornare tortor cursus tempus.</p>
             </div>
             <div class="row">
@@ -117,7 +119,6 @@
 <footer class="footer" >
     UPROOTED: An ImpactHack Project
 </footer>
-
 
 <script>
 
@@ -270,6 +271,10 @@ scatter_svg.append("text")
     .style("display", "none");
   group
     .append("circle")
+    .on("mouseover", function(d) {
+        var country = d;
+        update_to_selected_region(country)
+      })
 
 
   function set_active_y(y){
@@ -281,6 +286,12 @@ scatter_svg.append("text")
       active_y_metric = political_freedom
     }
     refresh_graphic()
+  }
+
+  function update_to_selected_region(region_name) {
+    console.log('updating to selected region')
+      selected_country = region_name
+      update_labels();
   }
 
   // End scatterplot setup
@@ -369,7 +380,7 @@ function update_labels(){
   datum = lookup[selected_country]
   console.log(datum)
   country_name = datum.name
-  d3.select(".country-label").text(country_name);
+  d3.select("#countryname").text(country_name);
   d3.select(".active_x_metric-axis_label")
     .text(metric_info[active_x_metric].name)
   d3.select(".active_y_metric-axis_label")
@@ -418,7 +429,6 @@ d3.queue()
     });
 
 </script>
-
 </body>
 
 </html>
