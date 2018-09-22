@@ -1,3 +1,7 @@
+// need a Document Ready Function to open the modal upon 
+// first starting page; then can click into content
+// NOTE the modal is also triggered by clicking on navbar brand
+
 // need an onclick to map
 // to display a country's name 
 // and that onlick pulls

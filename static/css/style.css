@@ -41,6 +41,10 @@ body {
     margin: 20px;
 }
 
+.modalstyling {
+    color:rgb(24, 40, 133);
+}
+
 .leaflet-popup-content {
     text-align: center;
   }
