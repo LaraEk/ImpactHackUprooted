@@ -1,3 +1,11 @@
+$(document).ready(function () {
+
+  $('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');
+  });
+
+});
+
 // Creating map object
 var myMap = L.map("map", {
     center: [40.7128, -74.0059],
