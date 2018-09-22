@@ -19,11 +19,12 @@ $(".nav-tabs").on("click", "#polittab", function () {
   $("#envirotab").removeClass("active");
   // display country-appropriate polit graph
   $("#graphtitle").empty();
-  $("#graphtitle").append("[TITLE OF POLIT GRAPH]");
-//  $("#graphimg").append();
+  $("#graphtitle").append("POLITICAL FREEDOM INDEX");
+  $("#graphexplanation").empty();
+  $("#graphexplanation").append("The Political Freedom Index demonstrates the freedom of citizens to express themseslves politically.");
   // display whatever links we wish to
   $("#articles").empty();
-  $("#articles").append("whatever articles we want to call in");
+//  $("#articles").append("whatever articles we want to call in");
 });
 
 $(".nav-tabs").on("click", "#econtab", function () {
@@ -34,8 +35,9 @@ $(".nav-tabs").on("click", "#econtab", function () {
   $("#envirotab").removeClass("active");
   // display country-appropriate econ graph
   $("#graphtitle").empty();
-  $("#graphtitle").append("[TITLE OF ECON GRAPH]");
-//  $("#graphimg").append();
+  $("#graphtitle").append("GDP");
+  $("#graphexplanation").empty();
+  $("#graphexplanation").append("Gross domestic power per capita based on purchasing power parity (PPP) in international dollars.");
 });
 
 $(".nav-tabs").on("click", "#envirotab", function () {
@@ -46,7 +48,9 @@ $(".nav-tabs").on("click", "#envirotab", function () {
   $("#polittab").removeClass("active");
   // display country-appropriate enviro graph
   $("#graphtitle").empty();
-  $("#graphtitle").append("[TITLE OF ENVIRO GRAPH]");
+  $("#graphtitle").append("WATER STRESS - ALL SECTORS");
+  $("#graphexplanation").empty();
+  $("#graphexplanation").append("Global indicators of change in water supply, water demand, water stress, and seasonal variability, projected for the coming decades under scenarios of climate and economic growth.");
 });
 
 

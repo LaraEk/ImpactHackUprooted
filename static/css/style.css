@@ -38,12 +38,31 @@ body {
     font-size: 12px;
 }
 
-#graphimg {
+#scatterplot {
     margin: 20px;
 }
 
-.modalstyling {
+#graphtitle {
+    font-family: 'Dosis', Sans-Serif;
+    font-size: 20px;
     color:rgb(24, 40, 133);
+    font-weight: bold;
+}
+
+#grapexplanation {
+    font-family: 'Titillium Web', Sans-Serif;
+    font-size: 16px;
+}
+
+#relatedreading {
+    font-family: 'Dosis', Sans-Serif;
+    font-size: 20px;
+    color:rgb(24, 40, 133);
+    font-weight: bold;
+}
+
+.modalstyling {
+
 }
 
 .footer {
