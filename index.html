@@ -359,17 +359,19 @@ scatter_svg.append("text")
           return "translate(0,0)"
         }
       });
-    scatter_svg.selectAll("g.bubble circle")
-      .transition()
-      .duration(700)
-      .attr("r", 5)
-      .style("fill", function(d) {
-        if (lookup[d]){
-          if (lookup[d][active_x_metric] == ""){return "#eaeaea";}
-          if (lookup[d][active_y_metric] == ""){return "#eaeaea";}
-        }
-        return '#000000' || "#eaeaea";
-      })
+      scatter_svg.selectAll("g.bubble circle")
+     .transition()
+     .duration(700)
+     .attr("r", 5)
+     .style("fill", function(d) {
+       if (lookup[d]){
+         if (lookup[d][active_x_metric] == ""){return "#eaeaea";}
+         if (lookup[d][active_y_metric] == ""){return "#eaeaea";}
+       }
+       return '#191970' || "#eaeaea";
+     })
+     .style('stroke', 'white')
+     .style('stroke-opacity', .4)
 }
 
 function update_labels(){
