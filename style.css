@@ -1,0 +1,18 @@
+/* Font-Family: 'Dosis', Sans-Serif;
+Font-Size: 48px;
+Font-Family: 'Titillium Web', Sans-Serif;
+Font-Size: 16px; */
+
+body {
+    background: url(tiny-squares.png);
+}
+
+#navbartop {
+    background: transparent;
+}
+
+.navbar-brand {
+    font-family: 'Dosis', Sans-Serif;
+    font-size: 30px;
+}
+
