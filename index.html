@@ -34,6 +34,7 @@
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Dosis|Titillium+Web" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -41,11 +42,12 @@
     <nav class="navbar" id="navbartop">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">UPROOTED: An ImpactHack Project</a>
-          </div>
+                <a class="navbar-brand" href="#" data-toggle="modal" data-target="#exampleModal"><img src="uprooted logo.png" style="height:150px"/></a>
+            </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>[filler text]</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>[filler text]</a></li>
+                <li><a href="https://impacthack.devpost.com/"><i class="fa fa-question-circle-o"></i>&nbsp;&nbsp;What is ImpactHack?</a></li>
+                 <li><a href="https://www.wri.org/"><i class="fa fa-globe"></i>&nbsp;&nbsp;World Resources Institute</a></li>
+                 <li><a href="https://www.state.gov/"><i class="fa fa-university"></i>&nbsp;&nbsp;US State Department</a></li>
           </ul>
         </div>
       </nav>
@@ -54,45 +56,67 @@
     <div class="container">
         <div class="row">
         <div class="col-md-8">
-
                 <div id="map" style='height:100%; width:100%'></div>
-
         </div>
-
         <div class="col-md-4 infobar">
-
-            <div class="row">Use JS to insert clicked-on Country Name
-                <div id="countryname">FILLER TEXT</div>
+            <div class="row">
+                <div id="countryname">COUNTRY NAME</div>
             </div>
-
             <div class="row">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#" onclick="set_active_y(1)">Environmental</a></li>
-                    <li><a href="#" onclick="set_active_y(2)">Economical</a></li>
-                    <li><a href="#" onclick="set_active_y(3)">Political</a></li>
-                  </ul>
+                    <li class="active"><a href="#">Social</a></li>
+                    <li><a href="#">Economical</a></li>
+                    <li><a href="#">Political</a></li>
+                </ul>
             </div>
-
             <div class="row">
-                <div id="scatterplot">
-                </div>
-                <p>Graph Explanation: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non massa tellus. Fusce maximus placerat nibh. Suspendisse diam nulla, mollis ut nisl ac, varius iaculis libero. Vivamus interdum ornare tortor cursus tempus. In nec egestas arcu. In consequat arcu ut commodo fringilla.</p>
+                <div id="scatterplot"></div>
+                <div id="graphtitle"></div>
+                <div id="graphexplanation"></div>
+                <p><b>Graph Explanation:</b>
+                    <br/> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non massa tellus. Fusce maximus placerat nibh. Suspendisse diam nulla, mollis ut nisl ac, varius iaculis libero. Vivamus interdum ornare tortor cursus tempus.</p>
             </div>
-            <div class="row">Related Reading
-                <p>Use JS to populate this area with links as necessary!</p>
+            <div class="row">
+                <b>Related Reading</b>
+                <div id="articles"></div>
             </div>
-
         </div>
 
 
     </div>
     </div>
+
+
+<!-- Modal -->
+<div class="modal fade modalstyling" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+               ...
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary">Save changes</button>
+             </div>
+           </div>
+         </div>
+     </div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
 
-</body>
+
+<footer class="footer" >
+    UPROOTED: An ImpactHack Project
+</footer>
 
 <script>
 
@@ -403,5 +427,5 @@ d3.queue()
     });
 
 </script>
-
+</body>
 </html>
