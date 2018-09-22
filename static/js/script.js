@@ -3,7 +3,6 @@ var myMap = L.map("map", {
     center: [40.4637, 3.7492],
     zoom: 2
   });
-<<<<<<< HEAD
 
   var country = "wld"
 
