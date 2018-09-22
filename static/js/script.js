@@ -1,30 +1,68 @@
+// need a Document Ready Function to open the modal upon
+// first starting page; then can click into content
+// NOTE the modal is also triggered by clicking on navbar brand
+
+// need an onclick to map
+// to display a country's name
+// and that onlick pulls
+// the correct country's information
+// into the infobar
+// it should also append the politgraph's Title, since
+// that is empty when the page loads
+
+
+$(".nav-tabs").on("click", "#polittab", function () {
+  // on click:
+  // make it Active Tab
+  $(this).addClass("active");
+  $("#econtab").removeClass("active");
+  $("#envirotab").removeClass("active");
+  // display country-appropriate polit graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF POLIT GRAPH]");
+//  $("#graphimg").append();
+  // display whatever links we wish to
+  $("#articles").empty();
+  $("#articles").append("whatever articles we want to call in");
+});
+
+$(".nav-tabs").on("click", "#econtab", function () {
+  // on click:
+  // make it Active Tab
+  $(this).addClass("active");
+  $("#polittab").removeClass("active");
+  $("#envirotab").removeClass("active");
+  // display country-appropriate econ graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF ECON GRAPH]");
+//  $("#graphimg").append();
+});
+
+$(".nav-tabs").on("click", "#envirotab", function () {
+  // on click:
+  // make it Active Tab
+  $(this).addClass("active");
+  $("#econtab").removeClass("active");
+  $("#polittab").removeClass("active");
+  // display country-appropriate enviro graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF ENVIRO GRAPH]");
+});
+
+
+
 // Creating map object
 var myMap = L.map("map", {
     center: [40.4637, 3.7492],
     zoom: 2
   });
-
   var country = "wld"
-
-  //Function to update Country variable
-  function onEachFeature(feature, layer) {
-    //bind click
-    layer.on('click', function (e) {
-      country = feature.properties.iso_a3
-      console.log(feature.properties.iso_a3)
-
-      // e = event
-
-    });
-
-}
-
 
   // Adding tile layer
   L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
-    id: "mapbox.satellite",
+    id: "mapbox.light",
     accessToken: API_KEY
   }).addTo(myMap);
 
@@ -45,7 +83,7 @@ var myMap = L.map("map", {
 
       // Set color scale
 
-      scale: ["#269CDB", "#30E558"],
+      scale: ["#D3D3D3", "#191970"],
 
       // Number of breaks in step range
 
@@ -60,13 +98,25 @@ var myMap = L.map("map", {
       fillOpacity: 0.8
     },
 
+
       // Binding a pop-up to each layer
       // Add event listener to add popup to layer and add to map
-    onEachFeature: onEachFeature
-    //}
-  //}).addTo(myMap);
 
-    }).addTo(myMap);
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup("Origin Country : " + feature.properties.name + "<hr> Refugees in the US: " + feature.properties.refugee_count),
+        //Function to update Country variable
+        //bind click
+        layer.on('click', function (e) {
+          country = feature.properties.iso_a3
+          console.log(country)
+        });
+      }
+
+
+
+  }).addTo(myMap);
+
+
 
     // Set up the legend
     var legend = L.control({ position: "bottomright" });
