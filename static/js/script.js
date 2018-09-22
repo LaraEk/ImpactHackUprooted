@@ -4,7 +4,7 @@ var myMap = L.map("map", {
     zoom: 2
   });
 <<<<<<< HEAD
-  
+
   var country = "wld"
 
   //Function to update Country variable
@@ -15,12 +15,11 @@ var myMap = L.map("map", {
       console.log(feature.properties.iso_a3)
 
       // e = event
-      
+
     });
 
 }
-=======
->>>>>>> dc4bf5eb5081f006fdb163071c2567e3a61d093c
+
 
   // Adding tile layer
   L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
