@@ -19,7 +19,7 @@ $(".nav-tabs").on("click", "#polittab", function () {
   $("#envirotab").removeClass("active");
   // display country-appropriate polit graph
   $("#graphtitle").empty();
-  $("#graphtitle").append("[TITLE OF POLIT GRAPH]");
+  $("#graphtitle").append("POLITICAL FREEDOM INDEX");
 //  $("#graphimg").append();
   // display whatever links we wish to
   $("#articles").empty();
@@ -34,7 +34,7 @@ $(".nav-tabs").on("click", "#econtab", function () {
   $("#envirotab").removeClass("active");
   // display country-appropriate econ graph
   $("#graphtitle").empty();
-  $("#graphtitle").append("[TITLE OF ECON GRAPH]");
+  $("#graphtitle").append("GDP");
 //  $("#graphimg").append();
 });
 
@@ -46,7 +46,7 @@ $(".nav-tabs").on("click", "#envirotab", function () {
   $("#polittab").removeClass("active");
   // display country-appropriate enviro graph
   $("#graphtitle").empty();
-  $("#graphtitle").append("[TITLE OF ENVIRO GRAPH]");
+  $("#graphtitle").append("WATER STRESS - ALL SECTORS");
 });
 
 

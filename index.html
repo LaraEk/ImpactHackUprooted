@@ -64,9 +64,9 @@
             </div>
             <div class="row">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#">Social</a></li>
-                    <li><a href="#">Economical</a></li>
-                    <li><a href="#">Political</a></li>
+                    <li class="active" id="polittab"><a href="#" onclick="set_active_y(3)" >Political</a></li>
+                    <li id="econtab"><a href="#" onclick="set_active_y(2)"> Economical</a></li>
+                    <li id="envirotab"><a href="#" onclick="set_active_y(1)">Environmental</a></li>
                 </ul>
             </div>
             <div class="row">
@@ -171,7 +171,7 @@ var political_freedom = "Political Freedoms Index";
 var refugees = "Number of Refugees from each Country to USA";
 
 var active_x_metric = refugees
-var active_y_metric = water_stress
+var active_y_metric = political_freedom
 var selected_country = 'CHN'
 
 var countries = ['ALB', 'DZA', 'AND', 'AGO', 'ATG', 'ARG', 'ARM', 'AUS', 'AUT',
