@@ -35,89 +35,363 @@
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Dosis|Titillium+Web" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
 </head>
 <body>
 
     <nav class="navbar" id="navbartop">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#" data-toggle="modal" data-target="#exampleModal"><img src="uprooted logo.png" style="height:150px"/></a>
+            <a class="navbar-brand" href="#">UPROOTED: An ImpactHack Project</a>
           </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://impacthack.devpost.com/"><i class="fa fa-question-circle-o"></i>&nbsp;&nbsp;What is ImpactHack?</a></li>
-            <li><a href="https://www.wri.org/"><i class="fa fa-globe"></i>&nbsp;&nbsp;World Resources Institute</a></li>
-            <li><a href="https://www.state.gov/"><i class="fa fa-university"></i>&nbsp;&nbsp;US State Department</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>[filler text]</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>[filler text]</a></li>
           </ul>
         </div>
       </nav>
 
+
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+        <div class="col-md-8">
+
                 <div id="map" style='height:100%; width:100%'></div>
-            </div>
 
-            <div class="col-md-3 infobar">
-                <div class="row">
-                    <div id="countryname">COUNTRY NAME</div>
-                </div>
-                <div class="row">
-                    <ul class="nav nav-tabs">
-                        <li class="active" id="polittab"><a href="#">Political</a></li>
-                        <li id="econtab"><a href="#">Economical</a></li>
-                        <li id="envirotab"><a href="#">Environmental</a></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <div id="graphimg">
-                            <img src="https://via.placeholder.com/200x200">
-                    </div>
-                    <div id="graphtitle"></div>
-                    <div id="graphexplanation"></div>
-                    <p><b>Graph Explanation:</b> 
-                        <br/> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non massa tellus. Fusce maximus placerat nibh. Suspendisse diam nulla, mollis ut nisl ac, varius iaculis libero. Vivamus interdum ornare tortor cursus tempus.</p>
-                </div>
-                <div class="row">
-                    <b>Related Reading</b>
-                    <div id="articles"></div>
-                </div>
-            </div>
-
-
-    </div>
-    </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade modalstyling" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
+
+        <div class="col-md-4 infobar">
+
+            <div class="row">Use JS to insert clicked-on Country Name
+                <div id="countryname">FILLER TEXT</div>
+            </div>
+
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#" onclick="set_active_y(1)">Environmental</a></li>
+                    <li><a href="#" onclick="set_active_y(2)">Economical</a></li>
+                    <li><a href="#" onclick="set_active_y(3)">Political</a></li>
+                  </ul>
+            </div>
+
+            <div class="row">
+                <div id="scatterplot">
+                </div>
+                <p>Graph Explanation: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non massa tellus. Fusce maximus placerat nibh. Suspendisse diam nulla, mollis ut nisl ac, varius iaculis libero. Vivamus interdum ornare tortor cursus tempus. In nec egestas arcu. In consequat arcu ut commodo fringilla.</p>
+            </div>
+            <div class="row">Related Reading
+                <p>Use JS to populate this area with links as necessary!</p>
+            </div>
+
+        </div>
+
+
     </div>
+    </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
 
-<footer class="footer" >
-    UPROOTED: An ImpactHack Project
-</footer>
-
 </body>
+
+<script>
+
+var margin = { top: 45, right: 40, bottom: 65, left: 40 };
+var sclfctr = .05
+var scatter_width = 300*(1+sclfctr) - margin.left - margin.right;
+var scatter_height = 300*(1+sclfctr) - margin.top - margin.bottom;
+
+function format_si(x) {
+  var s = d3.format(".2s")(x);
+  switch (s[s.length - 1]) {
+    case "G": return s.slice(0, -1) + "B";
+  }
+  return s;
+}
+
+var metric_info = {
+  "Number of Refugees from each Country to USA": {
+    "name": "Number of Refugees from each Country to USA",
+    "units": "People",
+    "scale": d3.scaleLinear().range([0,scatter_width]).clamp(true),
+    "format": format_si,
+    "extent": [0,700000]
+  },
+  "Water Stress, All Sectors": {
+    "name": "Water Stress, All Sectors",
+    "units": "Index Score",
+    "scale": d3.scaleLinear().range([0,scatter_width]).clamp(true),
+    "format": format_si,
+    "extent": [0,5]
+  },
+  "Political Freedoms Index": {
+    "name": "Political Freedoms Index",
+    "units": "Index Score",
+    "scale": d3.scaleLinear().range([0,scatter_width]).clamp(true),
+    "format": format_si,
+    "extent": [0,100]
+  },
+  "GDP": {
+    "name": "GDP",
+    "units": "USD",
+    "scale": d3.scaleLinear().range([0,scatter_width]).clamp(true),
+    "format": format_si,
+    "extent": [0,25000000000]
+  }
+}
+
+var gdp = "GDP";
+var water_stress = "Water Stress, All Sectors";
+var political_freedom = "Political Freedoms Index";
+var refugees = "Number of Refugees from each Country to USA";
+
+var active_x_metric = refugees
+var active_y_metric = water_stress
+var selected_country = 'CHN'
+
+var countries = ['ALB', 'DZA', 'AND', 'AGO', 'ATG', 'ARG', 'ARM', 'AUS', 'AUT',
+       'AZE', 'BHS', 'BHR', 'BGD', 'BRB', 'BLR', 'BEL', 'BLZ', 'BEN',
+       'BMU', 'BTN', 'BIH', 'BWA', 'BRA', 'BRN', 'BGR', 'BFA', 'BDI',
+       'KHM', 'CAN', 'CPV', 'CAF', 'TCD', 'CHL', 'CHN', 'COL', 'COM',
+       'COG', 'CRI', 'CIV', 'HRV', 'CUB', 'CYP', 'CZE', 'ZAR', 'DNK',
+       'DJI', 'DMA', 'DOM', 'ECU', 'EGY', 'SLV', 'GNQ', 'ERI', 'EST',
+       'ETH', 'FSM', 'FJI', 'FIN', 'FRA', 'GAB', 'GMB', 'GEO', 'DEU',
+       'GHA', 'GRC', 'GRL', 'GRD', 'GTM', 'GIN', 'GNB', 'GUY', 'HTI',
+       'HND', 'HKG', 'HUN', 'ISL', 'IND', 'IDN', 'IRQ', 'IRL', 'IRN',
+       'ISR', 'ITA', 'JAM', 'JPN', 'JOR', 'KAZ', 'KEN', 'KIR', 'KWT',
+       'KGZ', 'LAO', 'LVA', 'LBN', 'LBR', 'LBY', 'LTU', 'LUX', 'MAC',
+       'MKD', 'MDG', 'MWI', 'MYS', 'MDV', 'MLI', 'MLT', 'MHL', 'MRT',
+       'MUS', 'MEX', 'MNG', 'MNE', 'MAR', 'MOZ', 'MMR', 'NAM', 'NPL',
+       'NLD', 'NZL', 'NIC', 'NER', 'NGA', 'NOR', 'OMN', 'PAK', 'PLW',
+       'PAN', 'PNG', 'PRY', 'PER', 'PHL', 'BOL', 'POL', 'PRT', 'QAT',
+       'CMR', 'KOR', 'SDN', 'ROM', 'RUS', 'RWA', 'STP', 'SAU', 'SEN',
+       'SRB', 'SYC', 'SLE', 'SGP', 'SVK', 'SVN', 'SLB', 'ZAF', 'ESP',
+       'LKA', 'KNA', 'VCT', 'SUR', 'SWZ', 'SWE', 'CHE', 'TJK', 'THA',
+       'TGO', 'TON', 'TTO', 'TUN', 'TUR', 'TKM', 'UGA', 'UKR', 'ARE',
+       'GBR', 'TZA', 'USA', 'URY', 'UZB', 'VUT', 'VEN', 'VNM', 'YEM',
+       'ZMB', 'ZWE']
+
+/// CONTAINERS
+
+var scatter_svg = d3.select("#scatterplot")
+  .append("svg")
+    .attr("width", scatter_width + margin.left + margin.right)
+    .attr("height", scatter_height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// text label for the x axis
+scatter_svg.append("text")
+      .attr("transform","translate(" + (scatter_width/2) + " ," + (scatter_height + margin.top) + ")")
+      .attr("class","active_x_metric-axis_label")
+      .style("text-anchor", "middle");
+// text label for the y axis
+scatter_svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (scatter_height / 2))
+    .attr("dy", "1em")
+    .attr("class","active_y_metric-axis_label")
+    .style("text-anchor", "middle");
+
+  /// LOAD DATA
+  var lookup = {};
+
+  // DRAW SCATTER
+  scatter_svg.append("g")
+    .attr("transform", "translate(0," + scatter_height + ")")
+    .attr("class", "x axis");
+  scatter_svg.selectAll(".x.axis text")
+    .attr("y", 8);
+  scatter_svg.append("g")
+    .attr("transform", "translate(0,0)")
+    .attr("class", "y axis");
+
+  scatter_svg
+    .append("line")
+    .attr("class", "dark-line-1")
+    .style("stroke", "#777")
+    .style("stroke-width", 1)
+    .attr("y1", 0)
+    .attr("y2", scatter_height)
+    .attr("x1", scatter_width/2)
+    .attr("x2", scatter_width/2)
+
+  scatter_svg
+    .append("line")
+    .attr("class", "dark-line-2")
+    .style("stroke", "#777")
+    .style("stroke-width", 1)
+    .attr("x1", 0)
+    .attr("x2", scatter_width)
+    .attr("y1", scatter_height/2)
+    .attr("y2", scatter_height/2)
+  // All axes drawing occurs here
+  // Could use a logic check to draw axes if they don't yet exist, this works fine though
+  update_x_axis();
+  update_y_axis();
+
+  var group = scatter_svg.selectAll("g.bubble")
+    .data(countries)
+    .enter().append("g")
+    .attr("class", "bubble")
+  group
+    .append("text")
+    .attr("y", -20)
+    .attr("text-anchor", "middle")
+    .style("font-weight", "bold")
+    .text(function(d) {
+      return d in lookup ? lookup[d].name : "";
+    })
+    .style("display", "none");
+  group
+    .append("circle")
+
+
+  function set_active_y(y){
+    if (y == 1){
+      active_y_metric = water_stress
+    } else if (y == 2) {
+      active_y_metric = gdp
+    } else {
+      active_y_metric = political_freedom
+    }
+    refresh_graphic()
+  }
+
+  // End scatterplot setup
+  function refresh_graphic(){
+    update_x_axis();
+    update_y_axis();
+    update_labels();
+    transition_scatter();
+  }
+
+  function update_x_axis() {
+    xscale = metric_info[active_x_metric].scale;
+    xscale.domain(metric_info[active_x_metric].extent);
+    var xAxis = d3.axisBottom()
+      .tickSize(-scatter_width)
+      .tickFormat(metric_info[active_x_metric].format)
+      .scale(xscale);
+    scatter_svg.select(".x.axis")
+      .transition()
+      .call(xAxis);
+    d3.selectAll(".dark-line-1")
+      .transition()
+      .attr("x1", xscale(0))
+      .attr("x2", xscale(0))
+    scatter_svg.selectAll(".x.axis text")
+      .transition()
+      .attr("y", 8);
+  };
+
+  function update_y_axis(metric) {
+    yscale = metric_info[active_y_metric].scale;
+    yscale.domain(metric_info[active_y_metric].extent);
+
+    var yAxis = d3.axisLeft()
+      .tickSize(-scatter_height)
+      .tickFormat(metric_info[active_y_metric].format)
+      .scale(yscale);
+    scatter_svg.select(".y.axis")
+      .transition()
+      .call(yAxis);
+    d3.selectAll(".dark-line-2")
+      .transition()
+      .attr("y1", yscale(0))
+      .attr("y2", yscale(0))
+  };
+
+  function transition_scatter() {
+    // Color, size, and position scatter circles
+    scatter_svg.selectAll("g.bubble")
+      .transition()
+      .duration(700)
+      .style("opacity", function(d) {
+        console.log(d)
+        if (lookup[d]){
+          if (lookup[d][active_x_metric] == ""){return 0;}
+          if (lookup[d][active_y_metric] == ""){return 0;}
+        }
+        // Both metrics exist and are non-null
+        return 1;
+      })
+      .attr("transform", function(d) {
+        if(lookup[d]){
+          return "translate(" + xscale(+lookup[d][active_x_metric]) + "," + yscale(+lookup[d][active_y_metric]) + ")"
+        } else {
+          return "translate(0,0)"
+        }
+      });
+    scatter_svg.selectAll("g.bubble circle")
+      .transition()
+      .duration(700)
+      .attr("r", 5)
+      .style("fill", function(d) {
+        if (lookup[d]){
+          if (lookup[d][active_x_metric] == ""){return "#eaeaea";}
+          if (lookup[d][active_y_metric] == ""){return "#eaeaea";}
+        }
+        return '#000000' || "#eaeaea";
+      })
+}
+
+function update_labels(){
+  console.log('trying now')
+  console.log(selected_country)
+  console.log(lookup)
+  console.log(lookup[selected_country])
+  datum = lookup[selected_country]
+  console.log(datum)
+  country_name = datum.name
+  d3.select(".country-label").text(country_name);
+  d3.select(".active_x_metric-axis_label")
+    .text(metric_info[active_x_metric].name)
+  d3.select(".active_y_metric-axis_label")
+    .text(metric_info[active_y_metric].name)
+
+  if(active_x_metric in datum){
+    xval = +datum[active_x_metric]
+    if(xval == ""){
+      d3.select(".active_x_metric-value")
+        .text("-- " + metric_info[active_x_metric].units);
+    }else{
+      d3.select(".active_x_metric-value")
+        .text(metric_info[active_x_metric].format(xval) + " " + metric_info[active_x_metric].units);
+    }
+  } else {
+    d3.select(".active_x_metric-value")
+      .text("-- " + metric_info[active_x_metric].units);
+  }
+
+  if(active_y_metric in datum){
+    yval = +datum[active_y_metric]
+    if(yval == ""){
+      d3.select(".active_y_metric-value")
+        .text("-- " + metric_info[active_y_metric].units);
+    }else{
+      d3.select(".active_y_metric-value")
+        .text(metric_info[active_y_metric].format(yval) + " " + metric_info[active_y_metric].units);
+    }
+  } else {
+    d3.select(".active_y_metric-value")
+      .text("-- " + metric_info[active_y_metric].units);
+  }
+};
+
+d3.queue()
+  .defer(d3.csv, './scatterplotdata.csv')
+    .await(function(error, all_data) {
+      console.log(all_data)
+      all_data.forEach(function(d) {
+        lookup[d["Country Code"]] = lookup[d["Country Code"]] || {};
+        lookup[d["Country Code"]][d["variable"]] = d['value'];
+        lookup[d["Country Code"]]["name"] = lookup[d["Country Code"]]["name"] || d["Country Name"]
+      });
+    console.log(lookup)
+    refresh_graphic()
+    });
+
+</script>
+
 </html>

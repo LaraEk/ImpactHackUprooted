@@ -1,14 +1,14 @@
-// need a Document Ready Function to open the modal upon 
+// need a Document Ready Function to open the modal upon
 // first starting page; then can click into content
 // NOTE the modal is also triggered by clicking on navbar brand
 
 // need an onclick to map
-// to display a country's name 
+// to display a country's name
 // and that onlick pulls
 // the correct country's information
 // into the infobar
 // it should also append the politgraph's Title, since
-// that is empty when the page loads 
+// that is empty when the page loads
 
 
 $(".nav-tabs").on("click", "#polittab", function () {
@@ -108,11 +108,11 @@ var myMap = L.map("map", {
         //bind click
         layer.on('click', function (e) {
           country = feature.properties.iso_a3
-          console.log(country)  
-        }); 
-      } 
-    
-      
+          console.log(country)
+        });
+      }
+
+
 
   }).addTo(myMap);
 
