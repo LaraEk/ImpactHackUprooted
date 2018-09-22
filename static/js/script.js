@@ -3,36 +3,46 @@
 // and that onlick pulls
 // the correct country's information
 // into the infobar
+// it should also append the politgraph's Title, since
+// that is empty when the page loads 
 
 
 $(".nav-tabs").on("click", "#polittab", function () {
   // on click:
+  // make it Active Tab
   $(this).addClass("active");
   $("#econtab").removeClass("active");
   $("#envirotab").removeClass("active");
-  // make it Active Tab
   // display country-appropriate polit graph
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF POLIT GRAPH]");
+//  $("#graphimg").append();
   // display whatever links we wish to
+  $("#articles").empty();
+  $("#articles").append("whatever articles we want to call in");
 });
 
 $(".nav-tabs").on("click", "#econtab", function () {
   // on click:
+  // make it Active Tab
   $(this).addClass("active");
   $("#polittab").removeClass("active");
   $("#envirotab").removeClass("active");
-  // make it Active Tab
   // display country-appropriate econ graph
-  // display whatever links we wish to
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF ECON GRAPH]");
+//  $("#graphimg").append();
 });
 
 $(".nav-tabs").on("click", "#envirotab", function () {
   // on click:
+  // make it Active Tab
   $(this).addClass("active");
   $("#econtab").removeClass("active");
   $("#polittab").removeClass("active");
-  // make it Active Tab
   // display country-appropriate enviro graph
-  // display whatever links we wish to
+  $("#graphtitle").empty();
+  $("#graphtitle").append("[TITLE OF ENVIRO GRAPH]");
 });
 
 
